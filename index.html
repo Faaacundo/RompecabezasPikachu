@@ -7,11 +7,40 @@
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<script type="text/javascript" src="js/juego.js"></script>
+	<!-- Sweet Alert Script -->
+<script src="js/sweetalert.min.js"></script>
+<!-- Sweet Alert Styles -->
+<link href="css/sweetalert.css" rel="stylesheet">
+
 </head>
 <body>
 	
-	<div id="juego">
-	</div>
+	<div id="juego"></div>
+	<section class="tecleado">	
+		<p class=ultimoMovimiento>ÚLTIMO MOVIMIENTO:</h2>
+		<div id="flechas"></div>
+	</section>
+
+	<section id="contenedor">	
+		<p class="noEmpezaste">ESTÁS JUGANDO HACE:</h2>
+		<div class="cronometro">
+			<div class="reloj" id="minutos">00</div>
+			<div class="reloj" id="segundos">:00</div>
+			<div class="reloj" id="centesimas">:00</div>
+		</div>
+	</section>
+
+<div class=ganaste>
+
+		<div class="cronometro">
+			<div class="reloj" id="minutos">00</div>
+			<div class="reloj" id="segundos">:00</div>
+			<div class="reloj" id="centesimas">:00</div>
+		</div>
+
+</div>
+
+
 
 </body>
 </html>

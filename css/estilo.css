@@ -1,9 +1,19 @@
+*{
+    font-family: helvetica, sans-serif, comic-sans;
+    border: 0;
+
+}
 #juego{
   width: 600px;
   height: 600px;
-  position: relative;
+  position: absolute;
   border: solid 5px #73afe4;
   background-color: #73afe4;
+ margin-left: 3%;
+  margin-top: 2.5%;
+  box-shadow: 0 0px 15px #000;
+  border-radius: 5px;
+  float:left;
 }
 
 .pieza{
@@ -12,5 +22,61 @@
   height: 200px;
   background-size: 100% 100%;
   position: absolute;
-  transition: all .1s ease-in-out;
+  transition: all .1s cubic-bezier(.78,.72,.6,.91);
+}
+
+#flechas{
+  margin-top:20%;
+  position: absolute;
+      margin-left: 10%;
+}
+
+.ultimoMovimiento{
+  position: absolute;
+    float:left;
+    margin-left: 16.5%;
+}
+
+section{
+  box-shadow: 0 2px 5px #000;
+  position:absolute;
+    margin-top:5%;
+  margin-left: 65%;
+  width: 250px;
+  height: 250px;
+  border-radius: 15px;
+}
+/***********************************************************************************************************/
+#contenedor{
+ box-shadow: 0 2px 5px #000;
+  position:absolute;
+    margin-top:30%;
+  margin-left: 65%;
+  width: 250px;
+  height: 80px;
+  border-radius: 15px;
+}
+.reloj{
+  float: left;
+  font-size: 30px;
+  font-family: Courier,sans-serif;
+  color: #363431;
+}
+.noEmpezaste{
+      margin-left: 12%;
+}
+.cronometro{
+  margin-left: 20%;
+  margin-top: -5%;
+}
+
+.ganaste{
+ box-shadow: 0 1px 50px #000;
+  position:absolute;
+    margin-top:20%;
+  margin-left: 35%;
+  width: 250px;
+  height: 80px;
+  border-radius: 15px;
+  opacity: 0;
 }

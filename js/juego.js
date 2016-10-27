@@ -1,5 +1,9 @@
 var juego = {
   filas:[[],[],[]],
+  cent : 0,
+  seg : 0,
+  min : 0,
+
   espacioVacio:{
     fila:2,
     columna:2
@@ -62,22 +66,30 @@ var juego = {
     $(document).keyup(function(eventokd) {
         switch(eventokd.which) {
             case 37: //Numero del which de cada tecla presionada
-              self.moverHaciaLaIzquierda();
+              self.moverHaciaLaIzquierda();   
+                setTimeout(function(){ 
+     $('#flechas').fadeOut(1000);}, 2000)
             break;
 
             case 38:
-              self.moverHaciaArriba();
+              self.moverHaciaArriba();  
+                setTimeout(function(){ 
+     $('#flechas').fadeOut(1000);}, 2000) 
             break;
 
             case 39:
               self.moverHaciaLaDerecha();
+                setTimeout(function(){ 
+     $('#flechas').fadeOut(1000);}, 2000)
             break;
 
             case 40:
               self.moverHaciaAbajo();
+                setTimeout(function(){ 
+     $('#flechas').fadeOut(1000);}, 2000)
             break;
 
-            default: return; // Si toca otra cosa salga de los movimientos
+            default: return     this.pepito();  //$("#flechas").hide();  Si toca otra cosa salga de los movimientos
         }
             //eventokd.preventDefault(); //el evento pierde valor al llamar el preventDefault, no hace falta
             setTimeout(self.chequeamosSiGano.bind(self),150); //Para que no me pare el script el alert y se ejecute dsp de tanto tiempo por mi
@@ -90,26 +102,49 @@ var juego = {
     var filaOrigen = this.espacioVacio.fila-1;
     var columnaOrigen = this.espacioVacio.columna;
     this.intercambiarPosicionConEspacioVacio(filaOrigen, columnaOrigen);
+
+
+     $().ready(function(){
+      var flechas = $("#flechas");
+      flechas.html("<img src='piezas/flechaAbajo.png'>").fadeIn();
+       })
   },
 
   moverHaciaArriba(){
     var filaOrigen = this.espacioVacio.fila+1;
     var columnaOrigen = this.espacioVacio.columna;
     this.intercambiarPosicionConEspacioVacio(filaOrigen, columnaOrigen);
+
+
+     $().ready(function(){
+      var flechas = $("#flechas");
+     flechas.html("<img src='piezas/flechaArriba.png'>").fadeIn();
+       })
   },
 
   moverHaciaLaDerecha(){
     var filaOrigen = this.espacioVacio.fila;
     var columnaOrigen = this.espacioVacio.columna-1;
     this.intercambiarPosicionConEspacioVacio(filaOrigen, columnaOrigen);
+
+
+     $().ready(function(){
+      var flechas = $("#flechas");
+      flechas.html("<img src='piezas/flechaDerecha.png'>").fadeIn();
+       })
   },
 
   moverHaciaLaIzquierda(){
     var filaOrigen = this.espacioVacio.fila;
     var columnaOrigen = this.espacioVacio.columna+1;
    this.intercambiarPosicionConEspacioVacio(filaOrigen, columnaOrigen);
-  },
 
+
+    $().ready(function(){
+      var flechas = $("#flechas");
+      flechas.html("<img src='piezas/flechaIzquierda.png'>").fadeIn();
+       })
+  },
  chequeamosSiGano(){
     for (var filaCorrecta = 0; filaCorrecta < this.filas.length; filaCorrecta++) {
       for (var columnaCorrecta= 0; columnaCorrecta < this.filas.length; columnaCorrecta++) {
@@ -120,41 +155,98 @@ var juego = {
         }
       }
     }
-    return alert('GANASTEEEEEEEEEEEEEEE');
+    this.parar();
+    this.estrellas();
+    return swal({   title: "¡GANASTE!",   text: "Píkachu te felicita por que terminaste de armarlo!",  imageUrl: "piezas/thumbs-up.jpg" });
   },
   mezclarFichas(veces){
     var that = this;
     var arrayInterno = [that.moverHaciaArriba, that.moverHaciaAbajo, that.moverHaciaLaIzquierda, that.moverHaciaLaDerecha];
     var rand;
 
-    animacion(veces);
+    animacion(veces,that);
 
-    function animacion(contador) {
-      if (contador <= 0 ){ return; }
+    function animacion(contador,that) {
+      if (contador <= 0 ){
+        that.inicio();
+        return; 
+      }
       rand = Math.floor(Math.random() * 4);
       arrayInterno[rand].bind(that)();
       console.log("jiasjdakl");
       setTimeout(function(){
-        animacion(contador-1);
-      },100);
-    }
+        animacion(contador-1,that);
+      },25);
+    };
+    
   },
  iniciar:function(el){
     this.instalarPiezas(el);
     this.capturarTeclas();
-    this.mezclarFichas(20);
+    this.mezclarFichas(80);
   },
-
+  pepito: function(){
+  setTimeout(function(){ 
+     $('#flechas').fadeOut(10);}, 5500)
+  
+  },
+   inicio: function() {
+    this.control = setInterval(function() {
+  if (this.cent < 99) {
+    this.cent++;
+    if (this.cent < 10) { this.cent = "0"+this.cent }
+    //Centesimas.innerHTML = ":"+this.centesimas;
+    $("#centesimas").html(":"+this.cent);
   }
+  
+  if (this.cent == 99) {
+    this.cent = -1;
+  }
+  
+  if (this.cent == 0) {
+    this.seg++;
+    if (this.seg < 10) { this.seg = "0"+this.seg }
+      $("#segundos").html(":"+this.seg);
+  }
+  
+  if (this.seg == 59) {
+    this.seg = -1;
+  }
+  if ( (this.cent == 0)&&(this.seg == 0) ) {
+    this.min++;
+    if (this.min < 10) { this.min = "0"+this.min };   
+     $("#minutos").html(""+this.min);
+  }
+}.bind(this),10);
+},
+ parar:function() {
+  clearInterval(this.control);
+},
+estrellas: function(){
+         $('.ganaste').fadeIn(10000);
+         $('.ganaste').css({"opacity": "1"});
+          $('.ganaste').innerHTML=this.min;
+
+
+         }
+       
+}
+
+
 
 
 $(function(){
   var elemento = $('#juego');
-  juego.iniciar(elemento);
-  
-
-/* para saber el which de cada tecla
+  juego.iniciar(elemento);  /* para saber el which de cada tecla
   $(document).keydown(function(event){
 	console.log(event);
 */
 });
+
+
+
+
+
+
+
+
