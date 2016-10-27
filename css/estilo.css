@@ -1,17 +1,23 @@
 *{
-    font-family: helvetica, sans-serif, comic-sans;
+      font-family: 'Roboto Condensed', helvetica, sans-serif, comic-sans;
     border: 0;
-
+}
+body{
+  background-image: url("../piezas/fondoAsh.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 #juego{
-  width: 600px;
-  height: 600px;
+  width: 610px;
+  height: 610px;
   position: absolute;
-  border: solid 5px #73afe4;
-  background-color: #73afe4;
+  border: solid 5px yellow;
+ /* background-color: #73afe4;*/
+ background-image: url("../piezas/fondoPikachu.jpg");
+  background-repeat: no-repeat;
  margin-left: 3%;
   margin-top: 2.5%;
-  box-shadow: 0 0px 15px #000;
+  box-shadow: 0 0px 25px #333;
   border-radius: 5px;
   float:left;
 }
@@ -22,25 +28,21 @@
   height: 200px;
   background-size: 100% 100%;
   position: absolute;
-  transition: all .1s cubic-bezier(.78,.72,.6,.91);
+  transition: all .1s ease-in-out;
 }
 
 #flechas{
-  margin-top:20%;
-  position: absolute;
       margin-left: 10%;
 }
 
 .ultimoMovimiento{
-  position: absolute;
-    float:left;
-    margin-left: 16.5%;
+    text-align: center;
 }
 
 section{
   box-shadow: 0 2px 5px #000;
   position:absolute;
-    margin-top:5%;
+  margin-top:5%;
   margin-left: 65%;
   width: 250px;
   height: 250px;
@@ -50,11 +52,12 @@ section{
 #contenedor{
  box-shadow: 0 2px 5px #000;
   position:absolute;
-    margin-top:30%;
+  margin-top:30%;
   margin-left: 65%;
   width: 250px;
-  height: 80px;
+  height: 50px;
   border-radius: 15px;
+        padding-bottom: 5px;
 }
 .reloj{
   float: left;
@@ -63,20 +66,96 @@ section{
   color: #363431;
 }
 .noEmpezaste{
-      margin-left: 12%;
+      text-align: center;
+      margin-top: 2px;
+      margin-bottom: 5px;
 }
+
 .cronometro{
   margin-left: 20%;
   margin-top: -5%;
 }
-
-.ganaste{
- box-shadow: 0 1px 50px #000;
-  position:absolute;
-    margin-top:20%;
-  margin-left: 35%;
-  width: 250px;
-  height: 80px;
+#Numeros{
+  height: 200px;
+ /* left:35%;
+  top:35%;
+    position: absolute;*/
+    width:100%;
+    max-width:200px;
+    display:none;
+    position: fixed;
+margin-left:40%;
+margin-top: 15%;
+  z-index: 99;
+  box-shadow: 0 2px 5px #888;
   border-radius: 15px;
+
+}
+.Mensaje{
+  left:43%;
+  top:29%;
+  font-weight: bold;
+    position: absolute;
+    font-size: 25px;
+  z-index: 100;
+  text-align: center;
+}
+
+#cronoPausado{
   opacity: 0;
+  width:150px; /* 95px */
+  height: 50px; /* 30px*/
+  border-radius: 10px;
+  border: 0.5px solid rgba(5C, B5, C5, 0.5);
+  background-color: #B6E8F1;
+}
+
+.msjCronoPausado{
+  margin-bottom: -2px;
+font-size: 17px;
+}
+
+.estrellaMedio{
+margin-top: -30px;
+}
+
+#Creditos{
+  position: absolute;
+    left:67%;
+  top:72%;
+    width: 300px;
+  height: 200px;a
+}
+
+ul li{
+position: relative;
+left: 12%;
+margin-top: -3px;
+}
+
+ul li:first-child{
+list-style-image: url(../piezas/facebookicon.png);
+}
+
+ul li:nth-child(2){
+  list-style-image: url(../piezas/twittericon.png);
+}
+
+  ul li:nth-child(3){
+  list-style-image: url(../piezas/githubicon.png);
+}
+
+ul li:first-child:hover{
+list-style-image: url(../piezas/facebookicon.png);
+color:grey;
+}
+
+ul li:nth-child(2):hover{
+  list-style-image: url(../piezas/twittericon.png);
+  color:grey;
+}
+
+  ul li:nth-child(3):hover{
+  list-style-image: url(../piezas/githubicon.png);
+  color:grey;
 }

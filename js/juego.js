@@ -10,19 +10,18 @@ var juego = {
   },
   crearPieza(numero,fila, columna){
     var objeto = $('<div>');
-        objeto.addClass('pieza');
-
+      objeto.addClass('pieza');
         objeto.css({
           "backgroundImage":'url(piezas/' + numero + '.jpg)',
           "top": fila * 200,
           "left": columna * 200
         });
 
-    return {
-      el:objeto,
-      numero:numero,
-      filaInicial:fila,
-      columnaInicial:columna,
+       return {
+        el:objeto,
+        numero:numero,
+        filaInicial:fila,
+        columnaInicial:columna,
     };
   },
 
@@ -66,35 +65,25 @@ var juego = {
     $(document).keyup(function(eventokd) {
         switch(eventokd.which) {
             case 37: //Numero del which de cada tecla presionada
-              self.moverHaciaLaIzquierda();   
-                setTimeout(function(){ 
-     $('#flechas').fadeOut(1000);}, 2000)
+              self.moverHaciaLaIzquierda();                
             break;
 
             case 38:
-              self.moverHaciaArriba();  
-                setTimeout(function(){ 
-     $('#flechas').fadeOut(1000);}, 2000) 
+              self.moverHaciaArriba();                 
             break;
 
             case 39:
               self.moverHaciaLaDerecha();
-                setTimeout(function(){ 
-     $('#flechas').fadeOut(1000);}, 2000)
             break;
 
             case 40:
               self.moverHaciaAbajo();
-                setTimeout(function(){ 
-     $('#flechas').fadeOut(1000);}, 2000)
             break;
 
-            default: return     this.pepito();  //$("#flechas").hide();  Si toca otra cosa salga de los movimientos
+            default: return;  //$("#flechas").hide();  Si toca otra cosa salga de los movimientos
         }
             //eventokd.preventDefault(); //el evento pierde valor al llamar el preventDefault, no hace falta
             setTimeout(self.chequeamosSiGano.bind(self),150); //Para que no me pare el script el alert y se ejecute dsp de tanto tiempo por mi
-        
-         // se lo llama para verificar si estan todas correctas
     });
 
   },
@@ -102,19 +91,17 @@ var juego = {
     var filaOrigen = this.espacioVacio.fila-1;
     var columnaOrigen = this.espacioVacio.columna;
     this.intercambiarPosicionConEspacioVacio(filaOrigen, columnaOrigen);
-
-
      $().ready(function(){
       var flechas = $("#flechas");
       flechas.html("<img src='piezas/flechaAbajo.png'>").fadeIn();
        })
+
   },
 
   moverHaciaArriba(){
     var filaOrigen = this.espacioVacio.fila+1;
     var columnaOrigen = this.espacioVacio.columna;
     this.intercambiarPosicionConEspacioVacio(filaOrigen, columnaOrigen);
-
 
      $().ready(function(){
       var flechas = $("#flechas");
@@ -126,20 +113,17 @@ var juego = {
     var filaOrigen = this.espacioVacio.fila;
     var columnaOrigen = this.espacioVacio.columna-1;
     this.intercambiarPosicionConEspacioVacio(filaOrigen, columnaOrigen);
-
-
      $().ready(function(){
       var flechas = $("#flechas");
       flechas.html("<img src='piezas/flechaDerecha.png'>").fadeIn();
        })
+       
   },
 
   moverHaciaLaIzquierda(){
     var filaOrigen = this.espacioVacio.fila;
     var columnaOrigen = this.espacioVacio.columna+1;
    this.intercambiarPosicionConEspacioVacio(filaOrigen, columnaOrigen);
-
-
     $().ready(function(){
       var flechas = $("#flechas");
       flechas.html("<img src='piezas/flechaIzquierda.png'>").fadeIn();
@@ -156,9 +140,8 @@ var juego = {
       }
     }
     this.parar();
-    this.estrellas();
-    return swal({   title: "¡GANASTE!",   text: "Píkachu te felicita por que terminaste de armarlo!",  imageUrl: "piezas/thumbs-up.jpg" });
-  },
+    this.premio();
+},
   mezclarFichas(veces){
     var that = this;
     var arrayInterno = [that.moverHaciaArriba, that.moverHaciaAbajo, that.moverHaciaLaIzquierda, that.moverHaciaLaDerecha];
@@ -173,67 +156,126 @@ var juego = {
       }
       rand = Math.floor(Math.random() * 4);
       arrayInterno[rand].bind(that)();
-      console.log("jiasjdakl");
-      setTimeout(function(){
+            setTimeout(function(){
         animacion(contador-1,that);
       },25);
     };
     
   },
- iniciar:function(el){
+  iniciar(el){
     this.instalarPiezas(el);
     this.capturarTeclas();
-    this.mezclarFichas(80);
+    this.mezclarFichas(95);
+    //this.pepito();
   },
-  pepito: function(){
-  setTimeout(function(){ 
-     $('#flechas').fadeOut(10);}, 5500)
-  
+  /*pepito: function(){
+    setTimeout(function(){ 
+       $('#flechas').hide();}, 30)
+  },*/
+  inicio: function() {
+      this.control = setInterval(function() {
+    if (this.cent < 99) {
+      this.cent++;
+      if (this.cent < 10) { this.cent = "0"+this.cent }
+      //Centesimas.innerHTML = ":"+this.centesimas;
+      $("#centesimas").html(":"+this.cent);
+    }
+    
+    if (this.cent == 99) {
+      this.cent = -1;
+    }
+    
+    if (this.cent == 0) {
+      this.seg++;
+      if (this.seg < 10) { this.seg = "0"+this.seg }
+        $("#segundos").html(":"+this.seg);
+    }
+    
+    if (this.seg == 59) {
+      this.seg = -1;
+    }
+    if ( (this.cent == 0)&&(this.seg == 0) ) {
+      this.min++;
+      if (this.min < 10) { this.min = "0"+this.min };   
+       $("#minutos").html(""+this.min);
+      }
+    }.bind(this),10);
+},
+  parar:function() {
+    clearInterval(this.control);
   },
-   inicio: function() {
-    this.control = setInterval(function() {
-  if (this.cent < 99) {
-    this.cent++;
-    if (this.cent < 10) { this.cent = "0"+this.cent }
-    //Centesimas.innerHTML = ":"+this.centesimas;
-    $("#centesimas").html(":"+this.cent);
-  }
+  premio(){
+    $("#cartelPremio").css("opacity","100");
+    $("#cronoPausado").css("opacity","100");
+
+      var minutos = $("#minutos").text();
+      var segundos = $("#segundos").text();
+      var centesimas = $("#centesimas").text();
+
+      if((( this.min * 60 ) + this.seg) < 30){
+        $("#estrellaIzq").attr("src","piezas/estrella1Rellena.png");
+        $("#estrellaMed").attr("src","piezas/estrella2Rellena.png");
+        $("#estrellaDer").attr("src","piezas/estrella3Rellena.png");
+
+      }else if((( this.min * 60 ) + this.seg) < 90){
+        $("#estrellaIzq").attr("src","piezas/estrella1Rellena.png");
+        $("#estrellaMed").attr("src","piezas/estrella2Rellena.png");
+
+      } else {
+        console.log(this.min) 
+        console.log(this.seg)
+        $("#estrellaIzq").attr("src","piezas/estrella1Rellena.png");
+
+      }
+      
+    $("#cronoPausado").html(minutos + segundos + centesimas);
+    $("#cronoPausado").css({'margin-right':'auto','margin-left':'auto','font-size':'30px'});
+
+  $(document).ready(function(){
+$("#reiniciarJuego").click(function() { 
+location.reload()
+})
+})
+
+
+ 
+
+$(document).ready(function(){
+    $("#myBtn").ready(function(){
+        $("#myModal").modal();
+    });
+});
+
+
   
-  if (this.cent == 99) {
-    this.cent = -1;
   }
-  
-  if (this.cent == 0) {
-    this.seg++;
-    if (this.seg < 10) { this.seg = "0"+this.seg }
-      $("#segundos").html(":"+this.seg);
   }
-  
-  if (this.seg == 59) {
-    this.seg = -1;
-  }
-  if ( (this.cent == 0)&&(this.seg == 0) ) {
-    this.min++;
-    if (this.min < 10) { this.min = "0"+this.min };   
-     $("#minutos").html(""+this.min);
-  }
-}.bind(this),10);
-},
- parar:function() {
-  clearInterval(this.control);
-},
-estrellas: function(){
-         $('.ganaste').fadeIn(10000);
-         $('.ganaste').css({"opacity": "1"});
-          $('.ganaste').innerHTML=this.min;
+
+  $(document).ready(function(){
+    var Numero1 = $(".Numero1");
+    var Numero2 = $(".Numero2");
+    var Numero3 = $(".Numero3");
+    var Mensaje = $(".Mensaje");
+
+    setTimeout(function(){
+
+    Mensaje.fadeOut(100);}, 2000)
+    Numero1.hide()
+     Numero2.hide()
+      Numero3.hide().fadeIn().fadeOut();
+
+         setTimeout(function(){
+        Numero2.fadeIn().fadeOut();}, 700);
+
+         setTimeout(function(){
+      Numero1.fadeIn().fadeOut();}, 1400);
+
+$(function() {
+$( "#premio" ).ready(function() { $("button.close").hide(); });
+});
 
 
-         }
-       
-}
-
-
-
+  });
 
 $(function(){
   var elemento = $('#juego');
@@ -242,11 +284,3 @@ $(function(){
 	console.log(event);
 */
 });
-
-
-
-
-
-
-
-

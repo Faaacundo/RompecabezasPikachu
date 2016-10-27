@@ -2,27 +2,46 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<link rel="shortcut icon" type="image/x-icon" href="piezas/icon.png" />
+	<title>Píka píka</title>
 	<meta charset="utf-8">
+
+	<!--ESTILOS-->
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!--ANIMACIONES-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<script type="text/javascript" src="js/juego.js"></script>
-	<!-- Sweet Alert Script -->
-<script src="js/sweetalert.min.js"></script>
-<!-- Sweet Alert Styles -->
-<link href="css/sweetalert.css" rel="stylesheet">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+ <!--   <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>-->
+
+ 
 </head>
 <body>
-	
+
+	<marquee bgcolor="#ffdf51">ARMÁ A PÍKACHU CUANTO ANTES! &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;NO PIERDAS TIEMPO! &nbsp; &nbsp;- &nbsp; &nbsp;<b>AYUDA:</b> MIRÁ LAS FLECHAS QUE SE ENCUENTRAN AL COSTADO DEL JUEGO, TE PUEDEN AYUDAR A SABER CUAL FUE TU ÚLTIMO MOVIMIENTO.</marquee>
+
+<!--CONTEO DE NUMEROS AL INICIAR -->
+	<p class="Mensaje">EMPIEZA EN</p>
+ <img id="Numeros" class="Numero1" src="piezas/Numero1.png">
+ <img id="Numeros" class="Numero2" src="piezas/Numero2.png">
+ <img id="Numeros" class="Numero3" src="piezas/Numero3.png">
+
+
+	<!--FLECHAS INDICADORASSS -->
 	<div id="juego"></div>
 	<section class="tecleado">	
-		<p class=ultimoMovimiento>ÚLTIMO MOVIMIENTO:</h2>
+		<p class=ultimoMovimiento><b>ÚLTIMO MOVIMIENTO:<b></h2>
 		<div id="flechas"></div>
 	</section>
 
+<!--CRONOMETRO AL TERMINAR DE MEZCLAR LAS FICHAS -->
 	<section id="contenedor">	
-		<p class="noEmpezaste">ESTÁS JUGANDO HACE:</h2>
+		<p class="noEmpezaste"><b>ESTÁS JUGANDO HACE:<b></h2>
 		<div class="cronometro">
 			<div class="reloj" id="minutos">00</div>
 			<div class="reloj" id="segundos">:00</div>
@@ -30,17 +49,63 @@
 		</div>
 	</section>
 
-<div class=ganaste>
+	  <!-- Modal -->
+ <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+   <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">¡COMPLETASTE A PÍKACHU!</h4>
+        </div>
+        <div class="modal-body">
+			<h2>¡FELICITACIONES!</h2>
+			<h6>COMPLETASTE EL NIVEL 1</h6>
+			<br>
+			      <div id="estrellas">
+        	<img id="estrellaIzq" class="estrellaIzquierda"  src="piezas/estrella1.png">
+        	<img id="estrellaMed" class="estrellaMedio" 		src="piezas/estrella2.png">
+        	<img id="estrellaDer" class="estrellaDerecha"	src="piezas/estrella3.png">
+        	</div>
+        	<br>
+			<p class="msjCronoPausado">Lo terminaste en:</p>
+				<p id="cronoPausado"></p>
 
-		<div class="cronometro">
-			<div class="reloj" id="minutos">00</div>
-			<div class="reloj" id="segundos">:00</div>
-			<div class="reloj" id="centesimas">:00</div>
-		</div>
+        </div>
+        <div class="modal-footer">
+           <button type="button" id="reiniciarJuego" class="btn btn-default" data-dismiss="modal">Empezar de nuevo</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-</div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+    <div id="Creditos"> 
+  <p id="credi">Boludes creada por Facundo Nicolás</p>
+  	<ul>
+  		<li><a href="https://www.facebook.com/Faacundook">/Facundook</a></li>
+  	<li><a href="https://twitter.com/Facundorlando">/Facundorlando</a></li>
+  	<li><a href="https://github.com/Faaacundo">/Faaacundo</a></li>
+  	</ul></a-plane>
+  	</div>
 
+<!--<a-scene>
+   <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+ <a-box position="-1 0.5 -3" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9"></a-box> 
+  <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder> 
+  <a-entity position="0 0 500" rotation="90 0 0" geometry="primitive: circle; radius: 4" material="color:#FFC65D">
+          
+           <a-animation attribute="rotation" dur="10000" easing="linear" to="90 0 360" repeat="indefinite"></a-animation>
+           <a-entity rotation="-90 0 0" position="0 3 -0.5" geometry="primitive:plane;" material="side: double;shader:gif;src:url('./../../pikacorriendo.gif');opacity:1">
+            </a-entity>
 
+  <a-sound src="src: url(click.mp3)" autoplay="true" position="0 2 5"></a-sound>
 
+        </a-entity>
+    <a-plane position="-0.1 2 -4" rotation="0 0 -90" box-shadow="0 0 5px #000" width="4" height="8" color="#7BC8A4">
+
+  </a-scene>-->
 </body>
 </html>
